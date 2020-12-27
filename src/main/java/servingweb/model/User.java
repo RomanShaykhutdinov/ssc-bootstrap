@@ -20,6 +20,7 @@ public class User implements UserDetails {
     private String username;
     private String lastname;
     private Byte age;
+    private String email;
 
     @Column
     private String password;
@@ -33,10 +34,11 @@ public class User implements UserDetails {
 
     public User() {}
 
-    public User(String username, String lastname, Byte age) {
+    public User(String username, String lastname, Byte age, String email) {
         this.username = username;
         this.lastname = lastname;
         this.age = age;
+        this.email = email;
     }
 
     public User(Long id, String username, String password, Set<Role> roles) {
@@ -76,6 +78,14 @@ public class User implements UserDetails {
 
     public void setAge(Byte age) {
         this.age = age;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public void setRoles(Set<Role> roles) {
