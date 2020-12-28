@@ -31,13 +31,24 @@
 </head>
 <body>
 <!-- БАР -->
-<nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
-    <a class="navbar-brand col-sm-3 col-md-2 mr-0" sec:authentication="principal.roles"></a>
-    <ul class="navbar-nav px-1">
-        <li class="nav-item text-nowrap">
-            <a class="nav-link" href="/logout">Logout</a>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+            <a class="nav-link" sec:authentication="principal.email"></a>
         </li>
     </ul>
+    <div class="collapse navbar-collapse" >
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" sec:authentication="principal.role"></a>
+            </li>
+        </ul>
+        <ul class="navbar-nav px-3">
+            <li class="nav-item text-nowrap">
+                <a class="nav-link" href="/logout">Log out</a>
+            </li>
+        </ul>
+    </div>
 </nav>
 <!-- ВКЛАДКИ ЮЗЕРОВ -->
 <div class="row" data-widget="tab-slider">
@@ -87,7 +98,7 @@
                                 <td th:text="${user.lastname}"></td>
                                 <td th:text="${user.age}"></td>
                                 <td th:text="${user.email}"></td>
-                                <td th:text="${user.roles}"></td>
+                                <td th:text="${user.role}"></td>
                                 <td>
                                     <a class="btn btn-primary text-white eBtn"
                                        th:href="@{edit/(id=${user.id})}">Edit</a>
@@ -136,10 +147,10 @@
                             </div>
                             <div class="row justify-content-center">
                                 <div class="col-3">
-                                    <label class="col-form-label" for="roles">Roles</label>
-                                    <select style="height: 55px" multiple class="form-control" id="roles" name="roles" type="text">
-                                        <option>ROLE_USER</option>
-                                        <option>ROLE_ADMIN</option>
+                                    <label class="col-form-label" for="role">Roles</label>
+                                    <select style="height: 55px" multiple class="form-control" id="role" name="role" type="text">
+                                        <option value="USER">USER</option>
+                                        <option value="ADMIN">ADMIN</option>
                                     </select>
                                 </div>
                             </div>
@@ -152,7 +163,7 @@
                         </form>
                     </div>
                 </div>
-                <!-- Modal New -->
+                <!-- Modal Edit -->
                 <div class="myForm">
                     <form action="#" method="post" th:action="@{/saveUser}">
                         <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"
@@ -188,11 +199,11 @@
                                             <input class="form-control" id="password" name="password" type="text" value=""/>
                                         </div>
                                         <div class="form-group">
-                                            <label class="col-form-label" for="roles">Roles</label>
-                                            <select style="height: 55px" multiple class="form-control" id="roles" name="roles"
+                                            <label class="col-form-label" for="role">Roles</label>
+                                            <select style="height: 55px" multiple class="form-control" id="role" name="role"
                                                     type="text">
-                                                <option>ROLE_USER</option>
-                                                <option>ROLE_ADMIN</option>
+                                                <option value="USER">USER</option>
+                                                <option value="ADMIN">ADMIN</option>
                                             </select>
                                         </div>
                                     </div>
@@ -245,7 +256,7 @@
                                     $('.myForm #age').val(user.age);
                                     $('.myForm #email').val(user.email);
                                     $('.myForm #password').val(null);
-                                    $('.myForm #roles').val(user.roles);
+                                    $('.myForm #role').val(user.role);
                                 });
                                 $('.myForm #exampleModal').modal();
                             } else {
@@ -256,7 +267,7 @@
                                 $('.myForm #age').val('');
                                 $('.myForm #email').val('');
                                 $('.myForm #password').val('');
-                                $('.myForm #roles').val('');
+                                $('.myForm #role').val('');
                                 $('.myForm #exampleModal').modal();
                             }
                         });
@@ -289,7 +300,7 @@
                             <td sec:authentication="principal.id"></td>
                             <td sec:authentication="principal.username"></td>
                             <td sec:authentication="principal.lastname"></td>
-                            <td sec:authentication="principal.roles"></td>
+                            <td sec:authentication="principal.role"></td>
                             <td sec:authentication="principal.age"></td>
                         </tr>
                         </tbody>

@@ -21,6 +21,7 @@ public class User implements UserDetails {
     private String lastname;
     private Byte age;
     private String email;
+    private String role;
 
     @Column
     private String password;
@@ -34,11 +35,12 @@ public class User implements UserDetails {
 
     public User() {}
 
-    public User(String username, String lastname, Byte age, String email) {
+    public User(String username, String lastname, Byte age, String email, String role) {
         this.username = username;
         this.lastname = lastname;
         this.age = age;
         this.email = email;
+        this.role = role;
     }
 
     public User(Long id, String username, String password, Set<Role> roles) {
@@ -137,5 +139,13 @@ public class User implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }

@@ -12,7 +12,7 @@ import java.util.Set;
 public class Role implements GrantedAuthority {
 
     @Id
-    private long id;
+    private Long id;
     private String role;
 
     @Fetch(value = FetchMode.JOIN)
@@ -60,5 +60,6 @@ public class Role implements GrantedAuthority {
     public String toString() {
         return role;
     }
+
 }
 

@@ -1,5 +1,6 @@
 package servingweb.service;
 
+import servingweb.model.Role;
 import servingweb.model.User;
 
 import java.util.List;
@@ -12,8 +13,6 @@ public interface UserService {
     void saveUser(User user);
 
     List<User> getAllUsers();
-
-    void updateUser(User userChanges);
 
     User getUserById(Long id);
 

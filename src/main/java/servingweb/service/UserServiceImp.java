@@ -32,16 +32,14 @@ public class UserServiceImp implements UserService{
     @Override
     public void saveUser(User user) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        user.setRoles(Collections.singleton(new Role(1L, "ROLE_USER")));
+        String role = user.getRole();
+        System.out.println(role);
+        if (role.contains("USER") && !role.contains("ADMIN")) {
+            user.setRoles(Collections.singleton(new Role(1L, "ROLE_USER")));
+        } else {
+            user.setRoles(Collections.singleton(new Role(2L, "ROLE_ADMIN")));
+        }
         userRepository.save(user);
-    }
-
-    @Transactional
-    @Override
-    public void updateUser(User userChanges) {
-        userChanges.setPassword(bCryptPasswordEncoder.encode(userChanges.getPassword()));
-        userChanges.setRoles(Collections.singleton(new Role(1L, "ROLE_USER")));
-        userRepository.save(userChanges);
     }
 
     @Transactional
